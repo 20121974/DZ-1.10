@@ -1,8 +1,9 @@
 import java.util.Objects;
+
 public class Author {
     public final String name;
     public final String surname;
-    private Object other;
+
 
     public String getName() {
         return name;
@@ -18,18 +19,16 @@ public class Author {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(name);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Author author = (Author) o;
+        return Objects.equals(name, author.name) && Objects.equals(surname, author.surname);
     }
 
     @Override
-    public boolean equals(Object other) {
-        this.other = other;
-        if (this.getClass() != other.getClass()) {
-            return false;
-        }
-        Author c2 = (Author) other;
-        return name.equals(c2.name);
+    public int hashCode() {
+        return Objects.hash(name, surname);
     }
 
     @Override
